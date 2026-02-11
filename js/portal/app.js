@@ -92,6 +92,81 @@ function attachEvents() {
             window.location.hash = '#/';
         };
     }
+
+    const pNameInput = document.getElementById('p-name');
+const pColorInput = document.getElementById('p-color');
+const pSlugInput = document.getElementById('p-slug');
+
+if (pNameInput) {
+    // Listener para o Nome
+    pNameInput.addEventListener('input', (e) => {
+        const val = e.target.value || 'Sua Marca';
+        document.getElementById('view-brand-name').innerText = val;
+        document.getElementById('view-hero-title').innerText = `Bem-vindo à ${val}`;
+    });
+
+    // Listener para a Cor
+    pColorInput.addEventListener('input', (e) => {
+        const color = e.target.value;
+        document.getElementById('color-hex').innerText = color.toUpperCase();
+        // Aplica a cor no preview usando CSS Variables
+        document.getElementById('preview-frame').style.setProperty('--p-color', color);
+    });
+
+    // Listener para o Slug
+    pSlugInput.addEventListener('input', (e) => {
+        document.getElementById('preview-url').innerText = `aura.app/${e.target.value || 'escola'}`;
+    });
+
+    // Troca de Tabs (Landing / App)
+    const tabs = document.querySelectorAll('.stage-tab');
+    tabs.forEach(tab => {
+        tab.onclick = () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            updatePreviewMode(tab.dataset.view);
+        };
+    });
+}
+
+function updatePreviewMode(mode) {
+    const frame = document.getElementById('preview-frame');
+    const brand = document.getElementById('p-name').value || 'Marca';
+    const color = document.getElementById('p-color').value;
+
+    if (mode === 'landing') {
+        frame.innerHTML = `
+            <div class="preview-landing animate-in">
+                <nav class="p-nav">
+                    <div class="p-logo">❖ ${brand}</div>
+                    <div class="p-btn" style="background: ${color}">Acessar</div>
+                </nav>
+                <div class="p-hero">
+                    <h2>Bem-vindo à ${brand}</h2>
+                    <p>A infraestrutura definitiva para sua comunidade.</p>
+                    <div class="p-cta" style="background: ${color}">Explorar Cursos</div>
+                </div>
+            </div>
+        `;
+    } else {
+        frame.innerHTML = `
+            <div class="preview-app animate-in">
+                <aside class="pa-sidebar">
+                    <div class="pa-item active" style="color: ${color}">■</div>
+                    <div class="pa-item">□</div>
+                    <div class="pa-item">□</div>
+                </aside>
+                <main class="pa-main">
+                    <header>Olá, Aluno!</header>
+                    <div class="pa-grid">
+                        <div class="pa-card"></div>
+                        <div class="pa-card"></div>
+                    </div>
+                </main>
+            </div>
+        `;
+    }
+}
 }
 
 // Funções Globais (chamadas por onclick nos cards)

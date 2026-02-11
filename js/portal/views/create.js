@@ -1,33 +1,79 @@
-import { store } from '../store.js';
-
 export function createView() {
-
     return `
-        <div class="main-content">
-            <div class="header-page">
-                <h1>Nova Plataforma</h1>
-                <a href="#/" class="btn-new" style="background:transparent; color:#fff; border:1px solid #333;" data-link>Cancelar</a>
-            </div>
+        <div class="creator-container">
+            <!-- COLUNA DE CONTROLES -->
+            <aside class="creator-controls">
+                <div class="controls-header">
+                    <a href="#/" class="btn-back">← Voltar</a>
+                    <h1>Nova Instância</h1>
+                    <p>Configure a identidade da sua plataforma.</p>
+                </div>
 
-            <div style="max-width: 500px; background: rgba(255,255,255,0.03); padding: 40px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-                <form id="create-form">
-                    <div style="margin-bottom: 20px;">
-                        <label style="display:block; margin-bottom:8px; color:#888;">Nome da Escola/Empresa</label>
-                        <input type="text" id="p-name" placeholder="Ex: Start Academy" 
-                            style="width:100%; padding:12px; background:#111; border:1px solid #333; color:#fff; border-radius:6px;" required>
+                <form id="platform-form" data-mode="create">
+                    <div class="control-group">
+                        <label>Nome da Marca</label>
+                        <input type="text" id="p-name" placeholder="Ex: Rocket Academy" autocomplete="off" required>
+                    </div>
+
+                    <div class="control-group">
+                        <label>URL Customizada</label>
+                        <div class="input-with-prefix">
+                            <span>aura.app/</span>
+                            <input type="text" id="p-slug" placeholder="minha-escola" required>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Cor Identidade</label>
+                        <div class="color-picker-wrapper">
+                            <input type="color" id="p-color" value="#3B82F6">
+                            <code id="color-hex">#3B82F6</code>
+                        </div>
+                    </div>
+
+                    <div class="creator-actions">
+                        <button type="submit" class="btn-launch">
+                            <span>Lançar Plataforma</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </form>
+            </aside>
+
+            <!-- COLUNA DE PREVIEW (O PALCO) -->
+            <section class="creator-stage">
+                <div class="stage-nav">
+                    <button class="stage-tab active" data-view="landing">Landing Page</button>
+                    <button class="stage-tab" data-view="app">Plataforma</button>
+                </div>
+
+                <div class="preview-window">
+                    <div class="window-header">
+                        <div class="window-dots"><span></span><span></span><span></span></div>
+                        <div class="window-address" id="preview-url">aura.app/preview</div>
                     </div>
                     
-                    <div style="margin-bottom: 30px;">
-                        <label style="display:block; margin-bottom:8px; color:#888;">URL Desejada (Slug)</label>
-                        <input type="text" id="p-slug" placeholder="ex: start-academy" 
-                             style="width:100%; padding:12px; background:#111; border:1px solid #333; color:#fff; border-radius:6px;" required>
+                    <div class="window-content" id="preview-frame">
+                        <!-- O conteúdo do preview é injetado via JS (Landing ou App) -->
+                        <div class="preview-landing">
+                            <nav class="p-nav">
+                                <div class="p-logo">❖ <span id="view-brand-name">Marca</span></div>
+                                <div class="p-btn" style="background: var(--p-color)">Acessar</div>
+                            </nav>
+                            <div class="p-hero">
+                                <h2 id="view-hero-title">Sua plataforma de ensino.</h2>
+                                <p>Aprenda com os melhores profissionais do mercado em uma experiência imersiva.</p>
+                                <div class="p-cta" style="background: var(--p-color)">Começar Agora</div>
+                            </div>
+                            <div class="p-cards">
+                                <div class="p-card"></div>
+                                <div class="p-card"></div>
+                                <div class="p-card"></div>
+                            </div>
+                        </div>
                     </div>
-
-                    <button type="submit" class="btn-new" style="width:100%; border:none; cursor:pointer;">
-                        Lançar Instância 🚀
-                    </button>
-                </form>
-            </div>
+                </div>
+            </section>
         </div>
     `;
 }
