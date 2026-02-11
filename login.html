@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura - Identity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+    <!-- Background Dinâmico -->
+    <div class="ambient-bg" id="bg-layer">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <a href="index.html" class="back-link">← Voltar</a>
+
+    <!-- O Palco 3D -->
+    <main class="perspective-container">
+        <div class="card-3d-wrapper" id="card-wrapper">
+            
+            <!-- FACE 1: LOGIN (DARK MODE) -->
+            <div class="card-face face-front">
+                <div class="face-content">
+                    <div class="brand">
+                        <div class="logo">❖</div>
+                        <h2>Aura ID</h2>
+                    </div>
+                    
+                    <form class="auth-form" onsubmit="event.preventDefault()">
+                        <div class="input-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="seu@email.com" class="dark-input">
+                        </div>
+                        <div class="input-group">
+                            <label>Senha</label>
+                            <input type="password" placeholder="••••••••" class="dark-input">
+                        </div>
+                        
+                        <div class="actions">
+                            <a href="#" class="forgot">Esqueceu?</a>
+                        </div>
+
+                        <button class="btn-primary dark-btn">Acessar Console</button>
+                    </form>
+
+                    <div class="switch-area">
+                        <p>Novo por aqui?</p>
+                        <button class="switch-btn" id="to-register">Criar Conta</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FACE 2: REGISTER (LIGHT/VIBRANT MODE) -->
+<div class="card-face face-back">
+    <div class="face-content">
+        <div class="brand">
+            <div class="logo dark-logo">❖</div>
+            <h2 class="dark-text">Criar Aura ID</h2>
+        </div>
+        
+        <form class="auth-form" onsubmit="event.preventDefault()">
+            <div class="input-group">
+                <label class="dark-label">Nome Completo</label>
+                <input type="text" placeholder="Seu nome" class="light-input">
+            </div>
+
+            <div class="input-group">
+                <label class="dark-label">Email</label>
+                <input type="email" placeholder="seu@email.com" class="light-input">
+            </div>
+
+            <div class="input-group">
+                <label class="dark-label">Senha</label>
+                <input type="password" placeholder="Uma senha segura" class="light-input">
+            </div>
+
+            <!-- Botão com texto mais pessoal -->
+            <button class="btn-primary light-btn">Finalizar Cadastro</button>
+        </form>
+
+        <div class="switch-area">
+            <span class="dark-text">Já tem conta?</span>
+            <button class="switch-btn dark-link" id="to-login">Fazer Login</button>
+        </div>
+    </div>
+</div>
+    </main>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

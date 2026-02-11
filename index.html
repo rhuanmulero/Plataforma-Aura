@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura - The Invisible Engine</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+    <!-- AMBIENT BACKGROUND SYSTEM -->
+    <div class="ambient-system">
+        <div class="orb-hero"></div>
+        <div class="grid-floor"></div>
+        <div class="noise-overlay"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <div class="logo-mark">❖</div> AURA
+            </div>
+            <div class="nav-links">
+                <a href="#architecture">Arquitetura</a>
+                <a href="#features">Recursos</a>
+                <a href="login.html" class="btn-login-nav">Acessar Console</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (3D TILT ENABLED) -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-text">
+                <h1>A infraestrutura <br><span class="gradient-text">Invisível.</span></h1>
+                <p>Crie, gerencie e escale plataformas de ensino com um único motor white-label. A API definitiva para educação.</p>
+                
+                <div class="cta-group">
+                    <a href="login.html" class="btn-primary">
+                        <span class="shine"></span>
+                        Começar Agora
+                    </a>
+                    <button class="btn-secondary">Ler a Documentação</button>
+                </div>
+            </div>
+
+            <!-- THE MONOLITH (3D INTERFACE) -->
+            <div class="hero-stage">
+                <div class="glass-monolith" id="tilt-hero">
+                    <div class="monolith-content">
+                        <!-- Fake UI -->
+                        <div class="ui-header">
+                            <div class="dots"><span></span><span></span><span></span></div>
+                            <div class="address-bar">api.aura.dev/v1/instances</div>
+                        </div>
+                        <div class="ui-grid">
+                            <div class="ui-sidebar">
+                                <div class="sk-line w-50"></div>
+                                <div class="sk-line w-80"></div>
+                                <div class="sk-line w-60"></div>
+                            </div>
+                            <div class="ui-main">
+                                <div class="stat-row">
+                                    <div class="stat-card">
+                                        <div class="stat-label">Active Users</div>
+                                        <div class="stat-value">124,592</div>
+                                        <div class="stat-graph g-green"></div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-label">Revenue</div>
+                                        <div class="stat-value">$1.2M</div>
+                                        <div class="stat-graph g-blue"></div>
+                                    </div>
+                                </div>
+                                <div class="code-block">
+                                    <span class="c-purple">const</span> <span class="c-blue">school</span> = <span class="c-purple">await</span> aura.<span class="c-yellow">createInstance</span>({<br>
+                                    &nbsp;&nbsp;name: <span class="c-green">'Rocket Academy'</span>,<br>
+                                    &nbsp;&nbsp;region: <span class="c-green">'us-east-1'</span><br>
+                                    });
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Glow Border -->
+                    <div class="glow-border"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- FEATURE GRID (SPOTLIGHT EFFECT) -->
+    <section id="features" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>Poder Absoluto.</h2>
+                <p>Ferramentas desenhadas para escala global.</p>
+            </div>
+
+            <div class="cards-grid" id="cards-container">
+                <!-- Card 1 -->
+                <div class="feature-card">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="icon-box">⚡</div>
+                        <h3>Deploy Instantâneo</h3>
+                        <p>De zero a produção em segundos. Nossa infraestrutura serverless cuida do heavy lifting.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="feature-card">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="icon-box">🎨</div>
+                        <h3>White-Label Real</h3>
+                        <p>Domínio personalizado, CSS customizável e e-mails transacionais com sua marca.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="feature-card">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="icon-box">🔒</div>
+                        <h3>Dados Isolados</h3>
+                        <p>Arquitetura Multi-Tenant com isolamento lógico de dados. Segurança nível bancário.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FOOTER -->
+    <section class="cta-final">
+        <div class="orb-footer"></div>
+        <div class="container relative">
+            <h2>Pronto para construir?</h2>
+            <a href="login.html" class="btn-primary big">Criar Conta Grátis</a>
+        </div>
+    </section>
+
+    <script src="js/landing.js"></script>
+</body>
+</html>

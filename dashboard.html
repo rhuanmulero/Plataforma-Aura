@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Console</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Específico do Portal -->
+    <link rel="stylesheet" href="css/portal.css">
+</head>
+<body>
+    
+    <div class="ambient-system">
+    <div class="orb-hero" style="top: -30%; left: 20%; width: 800px; opacity: 0.2;"></div>
+    <div class="orb-hero" style="bottom: -30%; right: 10%; width: 600px; opacity: 0.15; background: #9333ea;"></div>
+    <div class="grid-floor"></div>
+    <div class="noise-overlay"></div>
+    </div>
+
+
+    <div id="app">
+        <!-- O CONTEÚDO SERÁ INJETADO AQUI PELO JS -->
+    </div>
+
+    <!-- Script Principal (Type Module é essencial para imports) -->
+    <script type="module" src="js/portal/app.js"></script>
+
+</body>
+</html>
