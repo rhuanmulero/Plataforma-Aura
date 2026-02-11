@@ -1,46 +1,51 @@
-// js/portal/views/dashboard.js
 import { store } from '../store.js';
 
 export function dashboardView() {
     const data = store.get();
     
-    // Renderiza Cards ou Empty State
+    const iconSettings = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>`;
+    const iconTrash = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>`;
+
     const cards = data.platforms.length > 0 ? data.platforms.map((p) => `
         <div class="card-platform">
-            <div class="card-top">
-                <div class="status-dot" style="color: ${p.primaryColor || '#3B82F6'}"></div>
-                <div style="color: #666;">❖</div>
-            </div>
-            
-            <div class="card-info">
-                <h3>${p.name}</h3>
-                <p>aura.app/${p.slug}</p>
-            </div>
+            <div class="card-inner">
+                <div class="card-header">
+                    <div class="status-badge">
+                        <span class="status-dot" style="background-color: ${p.primaryColor}; box-shadow: 0 0 12px ${p.primaryColor}80;"></span>
+                        Online
+                    </div>
+                    <div class="card-logo-mini">❖</div>
+                </div>
+                
+                <div class="card-body">
+                    <h3>${p.name}</h3>
+                    <p class="card-url">aura.app/${p.slug} <span>↗</span></p>
+                </div>
 
-            <div class="card-actions">
-                <a href="#/edit/${p.id}" class="btn-action btn-edit">Configurar</a>
-                <button onclick="window.deletePlatform('${p.id}')" class="btn-action btn-delete">Remover</button>
+                <div class="card-footer">
+                    <a href="#/edit/${p.id}" class="btn-manage">
+                        ${iconSettings}
+                        <span>Gerenciar Instância</span>
+                    </a>
+                    <button onclick="window.deletePlatform('${p.id}')" class="btn-delete-icon" title="Remover">
+                        ${iconTrash}
+                    </button>
+                </div>
             </div>
+            <div class="card-glow"></div>
         </div>
-    `).join('') : '<div style="color:#666; grid-column: 1/-1; text-align:center; padding: 40px;">Você ainda não tem projetos.</div>';
+    `).join('') : '<div class="empty-state">Nenhum projeto encontrado.</div>';
 
     return `
         <div class="main-content">
-            <div class="header-page">
+            <header class="page-header">
                 <div>
-                    <h1>Meus Projetos</h1>
-                    <p>Gerencie suas plataformas de ensino.</p>
+                    <h1>Console Principal</h1>
+                    <p>Bem-vindo ao Aura. Suas instâncias estão operando normalmente.</p>
                 </div>
-                
-                <!-- BOTÃO DE AÇÃO -->
-                <a href="#/create" class="btn-primary">
-                    <span>+</span> Novo Projeto
-                </a>
-            </div>
-
-            <div class="grid-cards">
-                ${cards}
-            </div>
+                <a href="#/create" class="btn-add-new">+ Novo Projeto</a>
+            </header>
+            <div class="grid-cards">${cards}</div>
         </div>
     `;
 }
