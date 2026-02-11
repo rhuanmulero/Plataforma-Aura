@@ -1,79 +1,72 @@
 export function createView() {
     return `
-        <div class="creator-container">
-            <!-- COLUNA DE CONTROLES -->
-            <aside class="creator-controls">
-                <div class="controls-header">
-                    <a href="#/" class="btn-back">← Voltar</a>
-                    <h1>Nova Instância</h1>
-                    <p>Configure a identidade da sua plataforma.</p>
+        <div class="pro-editor">
+            <!-- PAINEL DE FERRAMENTAS (ESTILO FIGMA/CANVA) -->
+            <aside class="editor-sidebar">
+                <div class="sidebar-top">
+                    <a href="#/" class="back-btn">←</a>
+                    <div class="editor-tabs">
+                        <button class="tab-btn active" data-tab="landing">Landing</button>
+                        <button class="tab-btn" data-tab="courses">Cursos</button>
+                    </div>
                 </div>
 
-                <form id="platform-form" data-mode="create">
-                    <div class="control-group">
-                        <label>Nome da Marca</label>
-                        <input type="text" id="p-name" placeholder="Ex: Rocket Academy" autocomplete="off" required>
-                    </div>
-
-                    <div class="control-group">
-                        <label>URL Customizada</label>
-                        <div class="input-with-prefix">
-                            <span>aura.app/</span>
-                            <input type="text" id="p-slug" placeholder="minha-escola" required>
+                <div class="scroll-area">
+                    <!-- SEÇÃO: IDENTIDADE -->
+                    <section class="editor-group">
+                        <label>Identidade da Marca</label>
+                        <div class="input-stack">
+                            <input type="text" id="p-name" placeholder="Nome da Escola" class="pro-input">
+                            <div class="color-row">
+                                <input type="color" id="p-color" value="#3B82F6">
+                                <span id="hex-label">#3B82F6</span>
+                            </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="control-group">
-                        <label>Cor Identidade</label>
-                        <div class="color-picker-wrapper">
-                            <input type="color" id="p-color" value="#3B82F6">
-                            <code id="color-hex">#3B82F6</code>
+                    <!-- SEÇÃO: HERO (LANDING) -->
+                    <section class="editor-group tab-content landing-only">
+                        <label>Cabeçalho (Hero)</label>
+                        <select id="p-hero-template" class="pro-input">
+                            <option value="minimal">Minimalista (Centro)</option>
+                            <option value="split">Split (Lado a Lado)</option>
+                            <option value="glass">Glassmorphism (Moderno)</option>
+                        </select>
+                        <textarea id="p-hero-title" placeholder="Título Principal" class="pro-input"></textarea>
+                    </section>
+
+                    <!-- SEÇÃO: GRID DE CURSOS -->
+                    <section class="editor-group">
+                        <label>Estilo dos Cards de Curso</label>
+                        <div class="card-style-grid">
+                            <div class="style-opt active" data-style="glass">Vidro</div>
+                            <div class="style-opt" data-style="solid">Sólido</div>
+                            <div class="style-opt" data-style="neon">Neon</div>
                         </div>
-                    </div>
+                    </section>
+                </div>
 
-                    <div class="creator-actions">
-                        <button type="submit" class="btn-launch">
-                            <span>Lançar Plataforma</span>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </button>
-                    </div>
-                </form>
+                <div class="sidebar-footer">
+                    <button id="btn-save-platform" class="launch-btn">
+                        <span>Lançar Aura</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
             </aside>
 
-            <!-- COLUNA DE PREVIEW (O PALCO) -->
-            <section class="creator-stage">
-                <div class="stage-nav">
-                    <button class="stage-tab active" data-view="landing">Landing Page</button>
-                    <button class="stage-tab" data-view="app">Plataforma</button>
-                </div>
-
-                <div class="preview-window">
-                    <div class="window-header">
-                        <div class="window-dots"><span></span><span></span><span></span></div>
-                        <div class="window-address" id="preview-url">aura.app/preview</div>
-                    </div>
-                    
-                    <div class="window-content" id="preview-frame">
-                        <!-- O conteúdo do preview é injetado via JS (Landing ou App) -->
-                        <div class="preview-landing">
-                            <nav class="p-nav">
-                                <div class="p-logo">❖ <span id="view-brand-name">Marca</span></div>
-                                <div class="p-btn" style="background: var(--p-color)">Acessar</div>
-                            </nav>
-                            <div class="p-hero">
-                                <h2 id="view-hero-title">Sua plataforma de ensino.</h2>
-                                <p>Aprenda com os melhores profissionais do mercado em uma experiência imersiva.</p>
-                                <div class="p-cta" style="background: var(--p-color)">Começar Agora</div>
-                            </div>
-                            <div class="p-cards">
-                                <div class="p-card"></div>
-                                <div class="p-card"></div>
-                                <div class="p-card"></div>
-                            </div>
-                        </div>
+            <!-- O PALCO (VIEWPORT) -->
+            <main class="editor-stage">
+                <div class="viewport-header">
+                    <div class="address-bar">
+                        <span class="lock">🔒</span>
+                        <span id="preview-url">sua-escola.aura.app</span>
                     </div>
                 </div>
-            </section>
+                
+                <div id="preview-canvas" class="canvas-viewport">
+                    <!-- Conteúdo Dinâmico Injetado -->
+                </div>
+            </main>
         </div>
     `;
 }
