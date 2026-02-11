@@ -34,10 +34,9 @@ const layout = (content) => {
 
     // Se for modo tela cheia (Create/Edit/View), retorna só o conteúdo
     // O CSS .fullscreen-mode vai cuidar de remover o grid do painel
-    if (hash.includes('/create') || hash.includes('/edit') || hash.includes('/view/')) {
+    if (hash.includes('/create') || hash.includes('/edit') || hash.includes('/view/') || hash.includes('/manage/')) {
         return content;
     }
-
     // Modo Dashboard (Com Sidebar)
     return `
         <aside class="sidebar" id="sidebar">
@@ -101,9 +100,9 @@ function render() {
     // --- CORREÇÃO DO LAYOUT QUEBRADO ---
     // Se estivermos vendo o site (/view/) ou criando (/create), 
     // adicionamos a classe que remove o Grid do Dashboard.
-    if (hash.includes('/create') || hash.includes('/view/')) {
+    if (hash.includes('/create') || hash.includes('/view/') || hash.includes('/manage/')) {
         app.classList.add('fullscreen-mode');
-        app.classList.remove('collapsed'); // Garante que não tenha margem de sidebar
+        app.classList.remove('collapsed');
     } else {
         app.classList.remove('fullscreen-mode');
         // Restaura estado da sidebar do dashboard

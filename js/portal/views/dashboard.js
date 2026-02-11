@@ -30,7 +30,7 @@ export function dashboardView() {
                 </div>
 
                 <div class="card-footer">
-                    <a href="#/edit/${p.id}" class="btn-manage">
+                    <a href="#/manage/${p.id}" class="btn-manage">
                         ${iconSettings}
                         <span>Gerenciar</span>
                     </a>
