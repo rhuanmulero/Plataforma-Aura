@@ -680,3 +680,106 @@ body {
 /* CORREÇÕES DE ESTILO DE CARD */
 .lp-course-card.glass { backdrop-filter: blur(10px); background: rgba(255,255,255,0.02); }
 .lp-course-card.neon { border-color: inherit; box-shadow: 0 0 15px rgba(255,255,255,0.05); }
+
+/* --- MODAL DE EXCLUSÃO (DANGER ZONE) --- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.danger-modal {
+    background: #09090b;
+    border: 1px solid #3f3f46;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 440px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: 0 20px 50px -10px rgba(0,0,0,0.8);
+    position: relative;
+    overflow: hidden;
+    animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Barra vermelha no topo para indicar perigo */
+.danger-modal::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px; background: #ef4444;
+}
+
+.danger-icon {
+    background: rgba(239, 68, 68, 0.1);
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.danger-modal h2 { font-size: 1.25rem; margin-bottom: 12px; color: #fff; }
+
+.danger-modal p { 
+    font-size: 0.9rem; color: #a1a1aa; margin-bottom: 24px; line-height: 1.5; 
+}
+
+.danger-modal label {
+    display: block; text-align: left; font-size: 0.8rem; font-weight: 600;
+    color: #fff; margin-bottom: 8px;
+}
+
+.danger-input {
+    width: 100%;
+    background: #18181b;
+    border: 1px solid #3f3f46;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: 0.2s;
+    margin-bottom: 8px;
+}
+
+.danger-input:focus {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+.modal-actions {
+    display: flex; gap: 12px; margin-top: 24px;
+}
+
+.btn-ghost {
+    flex: 1; padding: 12px; border-radius: 8px;
+    background: transparent; border: 1px solid #3f3f46;
+    color: #fff; cursor: pointer; font-weight: 500;
+    transition: 0.2s;
+}
+.btn-ghost:hover { background: #27272a; }
+
+.btn-danger {
+    flex: 1; padding: 12px; border-radius: 8px;
+    background: #ef4444; border: none;
+    color: #fff; cursor: pointer; font-weight: 600;
+    transition: 0.2s;
+}
+.btn-danger:hover { background: #dc2626; }
+.btn-danger:disabled { background: #7f1d1d; color: #fca5a5; cursor: not-allowed; opacity: 0.7; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+#app.fullscreen-mode {
+    display: block !important; /* Remove o display: grid */
+    padding: 0 !important;
+    overflow: hidden !important;
+    height: 100vh;
+    width: 100vw;
+}
