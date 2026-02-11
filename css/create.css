@@ -1,0 +1,206 @@
+/* css/create.css */
+
+:root {
+    --editor-bg: #000000;
+    --sidebar-bg: #09090b;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --input-bg: #18181b;
+    --input-text: #f4f4f5; /* Texto sempre claro */
+    --active-color: #3B82F6;
+    --text-muted: #71717a;
+}
+
+/* --- RESET & LAYOUT --- */
+.pro-editor {
+    display: grid;
+    grid-template-columns: 340px 1fr; /* Sidebar um pouco mais larga */
+    height: 100vh;
+    width: 100vw;
+    background: var(--editor-bg);
+    position: fixed;
+    top: 0; left: 0; z-index: 9999;
+}
+
+/* --- SIDEBAR --- */
+.editor-sidebar {
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    user-select: none;
+}
+
+.sidebar-top {
+    padding: 24px;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--sidebar-bg); /* Garante fundo sólido */
+}
+
+/* SCROLLBAR PERSONALIZADA (O pedido principal) */
+.scroll-area {
+    flex: 1;
+    overflow-y: overlay; /* Tenta sobrepor se o navegador suportar */
+    overflow-y: auto;    /* Fallback */
+    padding-bottom: 40px;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #27272a transparent; /* Firefox */
+}
+
+/* Scrollbar Webkit (Chrome, Edge, Safari) */
+.scroll-area::-webkit-scrollbar {
+    width: 6px;
+}
+.scroll-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+.scroll-area::-webkit-scrollbar-thumb {
+    background-color: #27272a;
+    border-radius: 10px;
+    border: 2px solid var(--sidebar-bg); /* Cria um padding visual */
+}
+.scroll-area::-webkit-scrollbar-thumb:hover {
+    background-color: #3f3f46;
+}
+
+/* GRUPOS */
+.editor-group {
+    padding: 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+.editor-group label {
+    display: block;
+    font-size: 0.75rem;
+    color: #a1a1aa;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+/* INPUTS CORRIGIDOS (Texto visível) */
+.pro-input {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid #27272a;
+    border-radius: 8px;
+    color: var(--input-text) !important; /* Força cor branca */
+    padding: 12px;
+    outline: none;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+    line-height: 1.5;
+}
+
+.pro-input::placeholder {
+    color: #52525b;
+}
+
+.pro-input:focus {
+    border-color: var(--active-color);
+    background: #000; /* Fica levemente mais escuro no foco */
+    box-shadow: 0 0 0 1px var(--active-color);
+}
+
+/* Textarea específico */
+textarea.pro-input {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Botão Voltar */
+.btn-back-editor {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--text-muted); text-decoration: none;
+    font-size: 0.85rem; font-weight: 500; transition: 0.2s;
+    margin-bottom: 16px; padding: 4px 0;
+}
+.btn-back-editor:hover { color: #fff; transform: translateX(-2px); }
+
+/* Tabs */
+.editor-tabs {
+    display: flex; background: #121214; padding: 4px;
+    border-radius: 8px; border: 1px solid #27272a;
+}
+.tab-btn {
+    flex: 1; border: none; background: transparent;
+    color: var(--text-muted); padding: 8px; border-radius: 6px;
+    cursor: pointer; font-size: 0.8rem; font-weight: 500; transition: 0.2s;
+}
+.tab-btn:hover { color: #fff; }
+.tab-btn.active { background: #27272a; color: #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+
+/* Footer Sidebar */
+.sidebar-footer {
+    padding: 24px;
+    border-top: 1px solid var(--border-color);
+    background: var(--sidebar-bg);
+}
+.launch-btn {
+    width: 100%; background: #fff; color: #000; border: none; padding: 14px;
+    border-radius: 10px; font-weight: 700; cursor: pointer; display: flex;
+    justify-content: center; align-items: center; gap: 8px; transition: 0.2s;
+}
+.launch-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255,255,255,0.15); }
+
+/* --- Visual Grids e Botões (Mantidos e Refinados) --- */
+.visual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.visual-option {
+    background: var(--input-bg); border: 1px solid #27272a;
+    border-radius: 10px; padding: 12px; cursor: pointer;
+    text-align: center; transition: 0.2s; position: relative;
+}
+.visual-option:hover { border-color: #52525b; }
+.visual-option.active { border-color: var(--active-color); background: rgba(59, 130, 246, 0.05); }
+
+/* Labels dentro dos cards */
+.opt-label { font-size: 0.75rem; color: #a1a1aa; display: block; margin-top: 8px; }
+.visual-option.active .opt-label { color: #fff; }
+
+/* Mini Previews */
+.mini-preview { height: 40px; border-radius: 4px; position: relative; border: 1px solid rgba(255,255,255,0.1); }
+.mp-dark { background: #09090b; }
+.mp-light { background: #fff; }
+.mp-minimal::after { content: ""; position: absolute; top: 40%; left: 20%; right: 20%; height: 20%; background: #52525b; }
+.mp-split { display: flex; }
+.mp-split::before { content: ""; width: 50%; height: 100%; background: #333; border-right: 1px solid #000; }
+
+/* Styles Grid */
+.style-grid { display: flex; gap: 8px; }
+.style-btn {
+    flex: 1; padding: 10px; background: var(--input-bg);
+    border: 1px solid #27272a; border-radius: 8px;
+    cursor: pointer; font-size: 0.8rem; color: #a1a1aa; transition: 0.2s;
+}
+.style-btn.active { background: #fff; color: #000; font-weight: 600; border-color: #fff; }
+
+/* --- PALCO --- */
+.editor-stage {
+    background: #050507;
+    background-image: radial-gradient(#1f1f1f 1px, transparent 1px);
+    background-size: 32px 32px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px;
+}
+.browser-mockup {
+    width: 100%; max-width: 1100px; height: 100%; max-height: 800px;
+    background: #000; border: 1px solid #27272a;
+    border-radius: 12px; box-shadow: 0 40px 80px -20px rgba(0,0,0,0.8);
+    display: flex; flex-direction: column; overflow: hidden;
+}
+.browser-header {
+    height: 44px; background: #09090b; border-bottom: 1px solid #27272a;
+    display: flex; align-items: center; padding: 0 16px; gap: 16px;
+}
+.traffic-lights { display: flex; gap: 8px; }
+.traffic-lights span { width: 10px; height: 10px; border-radius: 50%; }
+.traffic-lights span:nth-child(1) { background: #ef4444; }
+.traffic-lights span:nth-child(2) { background: #eab308; }
+.traffic-lights span:nth-child(3) { background: #22c55e; }
+.url-bar {
+    flex: 1; background: #000; height: 28px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    color: #52525b; font-size: 0.75rem; font-family: monospace; border: 1px solid #27272a;
+}
+.preview-canvas { flex: 1; position: relative; overflow: hidden; }
