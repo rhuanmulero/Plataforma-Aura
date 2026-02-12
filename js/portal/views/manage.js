@@ -2,47 +2,65 @@
 import { store } from '../store.js';
 import { AIService } from '../ai-service.js';
 
-// Estado local da gestão
-let currentTab = 'courses'; // Começamos em cursos para focar no pedido
+// Ícones padronizados (Apple/Motion Style)
+const lmsIcons = {
+    dashboard: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>`,
+    courses: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>`,
+    users: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>`,
+    finance: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>`,
+    settings: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>`,
+    chevron: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>`,
+    back: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>`
+};
+
+let currentTab = 'courses';
 let currentPlatformId = null;
 
 export function manageView(id) {
     currentPlatformId = id;
     const platform = store.getOne(id);
-
     if (!platform) return `<div style="color:white; padding:40px;">Plataforma não encontrada.</div>`;
 
+    const isCollapsed = localStorage.getItem('aura-lms-collapsed') === 'true';
+
     return `
-        <div class="lms-wrapper">
-            <!-- SIDEBAR -->
+        <div class="lms-wrapper ${isCollapsed ? 'collapsed' : ''}" id="lms-wrapper">
             <aside class="lms-sidebar">
-                <div class="lms-brand">
-                    <span style="color:${platform.config.primaryColor}">❖</span>
-                    ${platform.name}
+                <!-- HEADER COM BOTÃO TOGGLE -->
+                <div class="lms-sidebar-header">
+                    <div class="lms-brand">
+                        <span class="lms-logo-mark" style="color:${platform.config.primaryColor}">❖</span>
+                        <span class="lms-brand-text">${platform.name}</span>
+                    </div>
+                    <button class="btn-lms-toggle" onclick="window.toggleLmsSidebar()">
+                        ${lmsIcons.chevron}
+                    </button>
                 </div>
                 
                 <nav class="lms-nav">
                     <a class="lms-link ${currentTab === 'dashboard' ? 'active' : ''}" onclick="window.switchTab('dashboard')">
-                        📊 Dashboard
+                        ${lmsIcons.dashboard} <span>Dashboard</span>
                     </a>
                     <a class="lms-link ${currentTab === 'courses' ? 'active' : ''}" onclick="window.switchTab('courses')">
-                        📚 Cursos
+                        ${lmsIcons.courses} <span>Cursos</span>
                     </a>
                     <a class="lms-link ${currentTab === 'users' ? 'active' : ''}" onclick="window.switchTab('users')">
-                        👥 Usuários
+                        ${lmsIcons.users} <span>Usuários</span>
                     </a>
                     <a class="lms-link ${currentTab === 'finance' ? 'active' : ''}" onclick="window.switchTab('finance')">
-                        💰 Financeiro
+                        ${lmsIcons.finance} <span>Financeiro</span>
                     </a>
                     <a class="lms-link ${currentTab === 'settings' ? 'active' : ''}" onclick="window.switchTab('settings')">
-                        ⚙️ Portal
+                        ${lmsIcons.settings} <span>Portal</span>
                     </a>
                 </nav>
 
-                <a href="#/" class="lms-back">← Voltar ao Console</a>
+                <!-- BOTÃO VOLTAR COM SPAN PARA TEXTO -->
+                <a href="#/" class="lms-back">
+                    ${lmsIcons.back} <span>Voltar ao Console</span>
+                </a>
             </aside>
 
-            <!-- MAIN CONTENT -->
             <main class="lms-content" id="lms-main-area">
                 ${renderTabContent(currentTab, platform)}
             </main>
@@ -87,6 +105,12 @@ export function manageView(id) {
         </div>
     `;
 }
+
+window.toggleLmsSidebar = () => {
+    const wrapper = document.getElementById('lms-wrapper');
+    const isNowCollapsed = wrapper.classList.toggle('collapsed');
+    localStorage.setItem('aura-lms-collapsed', isNowCollapsed);
+};
 
 // Renderiza o conteúdo da aba selecionada
 function renderTabContent(tab, platform) {
